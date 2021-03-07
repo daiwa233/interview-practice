@@ -5,20 +5,19 @@
  */
 
 const curry = (fn) => {
-  let argSum = [];
-  const _fn = (...args) => {
-    argSum.push(...args);
-    if (argSum.length >= fn.length) {
-      fn(...argSum);
+  const _fn = (argArray = []) => (...args) => {
+    const newArray = argArray.slice();
+    newArray.push(...args);
+
+    if (newArray.length >= fn.length) {
+      fn.call(null, ...newArray);
       return null;
     } else {
-      return _fn;
+      return _fn(newArray);
     }
-  }
-  return (...args) => {
-    argSum = [];
-    return _fn(...args);
   };
-} 
+
+  return _fn();
+};
 
 export default curry;

@@ -19,5 +19,18 @@ describe('curry', () => {
 
     expect(mockFn.mock.calls.length).toBe(1);
 
+    const temp2 = curried(3, 3);
+    temp2(3);
+    temp2(3);
+    temp2(3);
+    temp2(3);
+
+    expect(mockFn.mock.calls.length).toBe(1);
+
+    const temp3 = curried(4, 4);
+    const temp4 = temp3(4, 4);
+    temp4(4, 4);
+
+    expect(mockFn.mock.calls.length).toBe(2);
   })
 })
